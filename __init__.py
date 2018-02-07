@@ -41,7 +41,7 @@ class ClickerGame(object):
             # checks if user wants to fight
             self.screen.fill((255, 255, 255))
             text_surface = self.font.render('Press space to fight!!', False, (0, 0, 0))
-            self.screen.blit(text_surface, (200, 200))
+            self.screen.blit(text_surface, (150, 200))
             play = self.battle()
             self.print_frames()
 
@@ -67,12 +67,12 @@ class ClickerGame(object):
                         self.screen.fill((255, 255, 255))
                         # writes damage to screen
                         self.screen.blit(text_surface, (random.randint(200, 400), random.randint(120, 300)))
-                        if self.enemy.isDead():
+                        if self.enemy.is_dead():
                             return self.battle_end()
                     # User presses ESCAPE-Key
                     if event.key == pygame.K_ESCAPE:
                         return False
-
+            self.draw_info()
             self.print_frames()
 
     def battle_end(self):
@@ -93,6 +93,10 @@ class ClickerGame(object):
                     elif event.key == pygame.K_n or event.key == pygame.K_ESCAPE:
                         return False
             self.print_frames()
+
+    def draw_info(self):
+        pygame.draw.rect(self.screen, (0, 0, 0), (10, 20, 200, 10))
+        pygame.draw.rect(self.screen, (255, 0, 0), (10, 20, 200 * (self.enemy.health / self.enemy.max_health), 10))
 
 
 
