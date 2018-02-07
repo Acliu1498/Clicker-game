@@ -20,6 +20,7 @@ class ClickerGame(object):
         self.play_time = 0.0
 
     def print_frames(self):
+        """helper method to print the frames and update the display"""
         # Print framerate and playtime in titlebar.
         text = "FPS: {0:.2f}   Playtime: {1:.2f}".format(self.clock.get_fps(), self.play_time)
         pygame.display.set_caption(text)
@@ -27,6 +28,7 @@ class ClickerGame(object):
         pygame.display.flip()
 
     def play_game(self):
+        """ main play function of the game"""
         play = True
 
         while play:
@@ -44,6 +46,7 @@ class ClickerGame(object):
             self.print_frames()
 
     def battle(self):
+        """conducts battle for the game"""
         # while the game is on keep looping
         while True:
             # creates enemy
@@ -73,6 +76,7 @@ class ClickerGame(object):
             self.print_frames()
 
     def battle_end(self):
+        """at the end of the battle asks if the user wants to keep playing"""
         while True:
             # once enemy is dead ask user if they want to play again
             self.screen.fill((255, 255, 255))
