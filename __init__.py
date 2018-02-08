@@ -37,7 +37,7 @@ class ClickerGame(object):
             # gets user play time
             self.play_time += milliseconds / 1000.0
             # creates new enemy
-            self.enemy = Enemy.Enemy(self.player.level)
+            self.enemy = Enemy.Enemy(self.player.get_lvl())
             # checks if user wants to fight
             self.screen.fill((255, 255, 255))
             text_surface = self.font.render('Press space to fight!!', False, (0, 0, 0))
@@ -97,6 +97,17 @@ class ClickerGame(object):
     def draw_info(self):
         pygame.draw.rect(self.screen, (0, 0, 0), (10, 20, 200, 10))
         pygame.draw.rect(self.screen, (255, 0, 0), (10, 20, 200 * (self.enemy.health / self.enemy.max_health), 10))
+
+        info_font = pygame.font.SysFont('Comic Sans MS', 18)
+
+        text_surface = info_font.render("Player Info: ", False, (0, 0, 0))
+        self.screen.blit(text_surface, (10, 100))
+        text_surface = info_font.render("Attack: ", False, (0, 0, 0))
+        self.screen.blit(text_surface, (10, 120))
+        text_surface = info_font.render("Xp: ", False, (0, 0, 0))
+        self.screen.blit(text_surface, (10, 140))
+        text_surface = info_font.render("Xp2NextLvl: ", False, (0, 0, 0))
+        self.screen.blit(text_surface, (10, 160))
 
 
 
