@@ -37,7 +37,7 @@ class ClickerGame(object):
             # gets user play time
             self.play_time += milliseconds / 1000.0
             # creates new enemy
-            self.enemy = Enemy.Enemy(self.player.get_lvl())
+            self.enemy = Enemy.Enemy(self.player)
             # checks if user wants to fight
             self.screen.fill((255, 255, 255))
             text_surface = self.font.render('Press space to fight!!', False, (0, 0, 0))
@@ -77,11 +77,16 @@ class ClickerGame(object):
 
     def battle_end(self):
         """at the end of the battle asks if the user wants to keep playing"""
-        while True:
-            # once enemy is dead ask user if they want to play again
+        # once enemy is dead ask user if they want to play again
+        if self.check_lvl_up(self.enemy.get_xp()):
+            self.screen.fill((255, 255, 255))
+            text_surface = self.font.render('You Leveled Up!! Continue(Y/N)', False, (0, 0, 0))
+            self.screen.blit(text_surface, (100, 200))
+        else:
             self.screen.fill((255, 255, 255))
             text_surface = self.font.render('You killed it!! Continue(Y/N)', False, (0, 0, 0))
-            self.screen.blit(text_surface, (200, 200))
+            self.screen.blit(text_surface, (100, 200))
+        while True:
             for event in pygame.event.get():
                 # exit if user tries to exit
                 if event.type == pygame.QUIT:
@@ -94,20 +99,28 @@ class ClickerGame(object):
                         return False
             self.print_frames()
 
+    def check_lvl_up(self, xp):
+        self.player.add_xp(xp)
+        return self.player.lvl_up()
+
     def draw_info(self):
         pygame.draw.rect(self.screen, (0, 0, 0), (10, 20, 200, 10))
-        pygame.draw.rect(self.screen, (255, 0, 0), (10, 20, 200 * (self.enemy.health / self.enemy.max_health), 10))
+        pygame.draw.rect(self.screen, (255, 0, 0), (10, 20, 200 * (self.enemy.get_curr_health() /
+                                                                   self.enemy.get_max_health()), 10))
 
         info_font = pygame.font.SysFont('Comic Sans MS', 18)
 
         text_surface = info_font.render("Player Info: ", False, (0, 0, 0))
         self.screen.blit(text_surface, (10, 100))
-        text_surface = info_font.render("Attack: ", False, (0, 0, 0))
+        text_surface = info_font.render("Level: " + self.player.get_lvl(), False, (0, 0, 0))
         self.screen.blit(text_surface, (10, 120))
-        text_surface = info_font.render("Xp: ", False, (0, 0, 0))
+        text_surface = info_font.render("Attack: " + self.player.get_atk_lower() + " - " +
+                                        self.player.get_atk_upper(), False, (0, 0, 0))
         self.screen.blit(text_surface, (10, 140))
-        text_surface = info_font.render("Xp2NextLvl: ", False, (0, 0, 0))
+        text_surface = info_font.render("Xp: " + self.player.get_curr_xp(), False, (0, 0, 0))
         self.screen.blit(text_surface, (10, 160))
+        text_surface = info_font.render("Xp2NextLvl: " + self.player.get_xp2lvl(), False, (0, 0, 0))
+        self.screen.blit(text_surface, (10, 180))
 
 
 
