@@ -3,6 +3,7 @@ import Character
 import random
 import Enemy
 import image
+import os
 
 
 class ClickerGame(object):
@@ -158,7 +159,7 @@ class ClickerGame(object):
         text_surface = info_font.render("Xp: " + self.player.get_curr_xp(), False, (0, 0, 0))
         self.screen.blit(text_surface, (10, 205))
         # xp2nextlvl
-        text_surface = info_font.render("Xp2NextLvl: " + self.player.get_xp2lvl(), False, (0, 0, 0))
+        text_surface = info_font.render("Next Lvl: " + self.player.get_xp2lvl(), False, (0, 0, 0))
         self.screen.blit(text_surface, (10, 240))
 
 

@@ -15,10 +15,12 @@ class Character(object):
         self.__xp2lvl = 100
 
     def attack(self):
+        """Generates a random atk number based on the bounds"""
         # returns a random attack between the bounds
         return random.randint(self.__atk_lower, self.__atk_upper)
 
     def lvl_up(self):
+        """Levels up the current character"""
         # checks if enough to lvl up
         if self.__xp >= self.__xp2lvl:
             self.__xp2lvl = int(self.__xp2lvl * 1.75)
