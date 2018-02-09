@@ -5,11 +5,11 @@ class Character(object):
 
     def __init__(self):
         # character level
-        self.__level = 0
+        self.__level = 1
         # character attack upper bound
-        self.__atk_upper = 10
+        self.__atk_upper = 15
         # character attack lower bound
-        self.__atk_lower = 5
+        self.__atk_lower = 10
         # character xp
         self.__xp = 0
         self.__xp2lvl = 100

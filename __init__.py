@@ -72,11 +72,6 @@ class ClickerGame(object):
 
     def damage(self):
         """method damages enemy"""
-        # gets player attack damage
-        player_attack = self.player.attack()
-        # does damage to enemy
-        self.enemy.damage(player_attack)
-
         # location of the marker
         x = random.randint(300, 500)
         y = random.randint(250, 500)
@@ -91,6 +86,18 @@ class ClickerGame(object):
         # hit marker
         self.screen.blit(hit_marker, (x - 45, y - 25))
         # calculate damage
+        # gets player attack damage
+        if random.randint(0, 10) < 8:
+            player_attack = self.player.attack()
+
+        else:
+            player_attack = 2 * self.player.attack()
+            crit_font = pygame.font.SysFont('Comic Sans MS', 60)
+            text_surface = crit_font.render("Critical!!!!!!" + str(player_attack), False, (255, 0, 0))
+            self.screen.blit(text_surface, (260, 130))
+
+        # does damage to enemy
+        self.enemy.damage(player_attack)
         text_surface = self.font.render("Attack Damage: " + str(player_attack), False, (0, 0, 0))
         self.screen.blit(text_surface, (230, 530))
 
@@ -113,7 +120,7 @@ class ClickerGame(object):
                     return False
                 elif event.type == pygame.KEYDOWN:
                     # person presses space to attack
-                    if event.key == pygame.K_y:
+                    if event.key == pygame.K_y or event.key == pygame.K_SPACE:
                         return True
                     elif event.key == pygame.K_n or event.key == pygame.K_ESCAPE:
                         return False
