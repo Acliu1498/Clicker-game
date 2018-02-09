@@ -1,12 +1,14 @@
 import Character
 import image
 import random
+import os
 
 
 class Enemy(object):
     def __init__(self, player):
-        images = ['Images\\horned-monster.png', 'Images\\frame-2.png',
-                  'Images\\spiky-monster-game-obstacles-game-ornament.png', 'Images\\zombie.png']
+        images = [os.path.join('Images', 'horned-monster.png'), os.path.join('Images', 'frame-2.png'),
+                  os.path.join('Images', 'spiky-monster-game-obstacles-game-ornament.png'),
+                  os.path.join('Images', 'zombie.png')]
         self.__max_health = 100 + (10 * random.randint(int(player.get_atk_lower()) - 1,
                                                         int(player.get_atk_upper()) + 1))
         self.__health = self.__max_health

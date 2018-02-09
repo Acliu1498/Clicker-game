@@ -29,8 +29,9 @@ class ClickerGame(object):
     def play_game(self):
         """ main play function of the game"""
         play = True
-        background = ['Images\\environment_forestbackground.png', 'Images\\environment_forestbackground1-1.png',
-                      'Images\\environment_forest_evening.png']
+        background = [os.path.join('Images', 'environment_forestbackground.png'),
+                      os.path.join('Images', 'environment_forestbackground1-1.png'),
+                      os.path.join('Images', 'environment_forest_evening.png')]
 
         while play:
             # current fps
@@ -76,7 +77,7 @@ class ClickerGame(object):
         # location of the marker
         x = random.randint(300, 500)
         y = random.randint(250, 500)
-        hit_marker = image.Image("Images\\Explosion (1).png", (x, y))
+        hit_marker = image.Image(os.path.join('Images', 'Explosion (1).png'), (x, y))
         hit_marker = pygame.transform.scale(hit_marker.image, (120, 120))
         self.screen.fill([255, 255, 255])
         # background

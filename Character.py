@@ -28,8 +28,8 @@ class Character(object):
             # increments level
             self.__level += 1
             # increases attack bounds
-            self.__atk_upper += int(self.__atk_upper * 1/random.randrange(1, 10))
-            self.__atk_lower += int(self.__atk_lower * 1/random.randrange(1, 10))
+            self.__atk_upper += int(self.__atk_upper * 1/random.randrange(5, 10))
+            self.__atk_lower += int(self.__atk_lower * 1/random.randrange(5, 10))
             # checks if the lower bound is greater then upper, if so swaps
             if self.__atk_lower > self.__atk_upper:
                 t = self.__atk_upper
